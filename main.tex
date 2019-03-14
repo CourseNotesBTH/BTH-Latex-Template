@@ -1,0 +1,116 @@
+\documentclass{report}
+
+% Packages
+\usepackage{blindtext} % Lorem Ipsum
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % UTF-8 support
+\usepackage[export]{adjustbox}
+\usepackage{hyperref} % Enable linking within the document
+
+% Headers %
+\usepackage{fancyhdr}
+\fancyhf{}
+\lhead{\large\nouppercase\leftmark}
+\cfoot{\thepage}
+
+% Chapters %
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+\titlespacing{\chapter}{0pt}{0pt}{15pt}
+
+% References %
+\usepackage[
+backend=biber,
+style=ieee, % Reference style (IEEE for Civil Engineers in tech)
+citestyle=authoryear,
+uniquename=init,
+giveninits
+]{biblatex}
+\addbibresource{references.bib}
+
+% Margins %
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+\begin{document}
+\pagenumbering{roman}
+\thispagestyle{empty}
+
+% Title page %
+\vspace*{-1cm}\hspace{-0.75cm}\includegraphics[width=0.3\textwidth, right]{bth-logo.png} % Logo
+\vspace{3cm}
+\begin{center}
+{\Huge\textbf{Course name}} \\ % Course name
+\vspace{0.25cm}
+{\Huge\textbf{Course code}} \\ % Course code
+\vspace{0.5cm}
+{\huge\textbf{Project X}} \\ % Project name
+\vspace{3.5cm}
+{\huge\textbf{Firstname Lastname}} \\ % Author's name
+\vspace{5cm}
+{\LARGE\textbf{Project Supervisor:}} \\
+{\LARGE\textbf{Firstname Lastname}} \\ % Supervisor's name
+\vspace{1cm}
+{\Large\textbf{Year Month Day}} % Date
+\end{center}
+
+% Abstract %
+\vspace*{3.5cm}
+\centerline{\Huge\textbf{Abstract}}
+\addcontentsline{toc}{chapter}{Abstract}
+\vspace{1cm}
+\noindent
+\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+
+% Table of contents %
+\tableofcontents
+\newpage
+
+\pagestyle{fancy}
+\pagenumbering{arabic} % Use decimal numbers for pages
+
+% Introduction %
+\chapter{Introduction}
+\noindent
+\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+\footfullcite{lorem} % Example: Cite Lorem Ipsum and include the reference in the footer.
+
+% Methods %
+\chapter{Methods}
+\noindent
+\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+\cite{lorem} % Example: Cite Lorem Ipsum without inclusion in the footer, using the author date format as specified under References above.
+
+% Results %
+\chapter{Results}
+\noindent
+\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+A clickable link to example appendix \ref{Example Appendix}.
+
+% Discussion %
+\chapter{Discussion}
+\noindent
+\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+
+% Conclusion %
+\chapter{Conclusion}
+\noindent
+\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+
+% References %
+\printbibliography[heading=bibintoc,title={References}]
+
+% Appendix %
+\appendix
+\chapter*{Appendix}
+\addcontentsline{toc}{chapter}{Appendix}
+\renewcommand{\thesection}{\Alph{section}} % Use alphabetic numbering. Remove this line if numerical numbering is preffered.
+\section{Example Appendix}
+\label{Example Appendix}
+\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+
+\end{document}
