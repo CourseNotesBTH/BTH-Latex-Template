@@ -1,14 +1,36 @@
 \documentclass{report}
 
-% Packages
-\usepackage{blindtext} % Lorem Ipsum
+% Language %
+\usepackage[swedish, english]{babel}
+% Uncomment the line corresponding to the language you want to use.
+% Comment the other language.
+%\newcommand{\documentlanguage}{swedish} % Use Swedish
+\newcommand{\documentlanguage}{english} % Use English
+% Translations
+\usepackage{translations}
+\input{translations.tex}
+
+% Packages %
+\usepackage{float} % Images
+\usepackage{lipsum} % Lorem Ipsum
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % UTF-8 support
 \usepackage[export]{adjustbox}
-\usepackage{hyperref} % Enable linking within the document
+\usepackage{csquotes} % Dependecy of babel
+
+% Make links clickable %
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true, % Use colored text instead of boxes
+  urlcolor = blue, % Color for external hyperlinks
+  linkcolor = black, % Color of internal links
+  citecolor = black % Color of citations
+}
 
 % Headers %
 \usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
 \fancyhf{}
 \lhead{\large\nouppercase\leftmark}
 \cfoot{\thepage}
@@ -23,11 +45,17 @@
 \usepackage[
 backend=biber,
 style=ieee, % Reference style (IEEE for Civil Engineers in tech)
-citestyle=authoryear,
+sorting=none, % Sort references by first occurrence
 uniquename=init,
 giveninits
 ]{biblatex}
 \addbibresource{references.bib}
+
+% Automatically add "no date" for references without a given year
+\newcommand{\mkbibnodate}{\GetTranslation{no-date}}
+\AtEveryCitekey{\iffieldundef{labelyear}{\restorefield{labelyear}{\mkbibnodate}\restorefield{year}{\mkbibnodate}}{}}
+
+\AtEveryBibitem{\iffieldundef{labelyear}{\restorefield{labelyear}{\mkbibnodate}\restorefield{year}{\mkbibnodate}}{}}
 
 % Margins %
 \addtolength{\oddsidemargin}{-.875in}
@@ -36,35 +64,49 @@ giveninits
 \addtolength{\topmargin}{-.875in}
 \addtolength{\textheight}{1.75in}
 
+% Indents %
+\setlength{\parskip}{\baselineskip} % No indent and space between paragraphs
+\setlength{\parindent}{0pt}
+
+% Table spacing
+\renewcommand{\arraystretch}{1.5} % More spacing between rows in tables
+
+%%% Begin document %%%
 \begin{document}
+% Set the language depending on the variable document language
+\expandafter\selectlanguage\expandafter{\documentlanguage}
+% Let the first few pages use roman page numbering
 \pagenumbering{roman}
+% Remove all styles from the first page (disables footer)
 \thispagestyle{empty}
 
 % Title page %
-\vspace*{-1cm}\hspace{-0.75cm}\includegraphics[width=0.3\textwidth, right]{bth-logo.png} % Logo
+\vspace*{-1cm}\hspace{-0.75cm}\includegraphics[width=0.25\textwidth, right]{bth-logo.png} % Logo
 \vspace{3cm}
+
 \begin{center}
-{\Huge\textbf{Course name}} \\ % Course name
-\vspace{0.25cm}
-{\Huge\textbf{Course code}} \\ % Course code
-\vspace{0.5cm}
-{\huge\textbf{Project X}} \\ % Project name
-\vspace{3.5cm}
-{\huge\textbf{Firstname Lastname}} \\ % Author's name
-\vspace{5cm}
-{\LARGE\textbf{Project Supervisor:}} \\
-{\LARGE\textbf{Firstname Lastname}} \\ % Supervisor's name
-\vspace{1cm}
-{\Large\textbf{Year Month Day}} % Date
+    \Huge\textbf{Project name} \\ % Project name
+    \vspace{0.5cm}
+    \huge\textbf{Course name} \\ % Course name
+    \vspace{0.1cm}
+    \LARGE\textbf{Course code} \\ % Course code
+    \vspace{2cm}
+    \huge\textbf{Firstname Lastname} \\ % Author's name
+    \vfill % Pushes the text to the bottom of page
+    \LARGE\textbf{\GetTranslation{supervisor}:} \\
+    \LARGE\textbf{Firstname Lastname} \\ % Supervisor's name
+    \vspace{0.8cm}
+    \Large\textbf{Year Month Date} % Date
 \end{center}
 
+
 % Abstract %
+\newpage
 \vspace*{3.5cm}
-\centerline{\Huge\textbf{Abstract}}
+\centerline{\Huge\textbf{\GetTranslation{abstract}}}
 \addcontentsline{toc}{chapter}{Abstract}
 \vspace{1cm}
-\noindent
-\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+\lipsum[1-2] % Insert Lorem Ipsum. Should be replaced with your content
 
 % Table of contents %
 \tableofcontents
@@ -74,43 +116,56 @@ giveninits
 \pagenumbering{arabic} % Use decimal numbers for pages
 
 % Introduction %
-\chapter{Introduction}
-\noindent
-\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
-\footfullcite{lorem} % Example: Cite Lorem Ipsum and include the reference in the footer.
+\chapter{\GetTranslation{introduction}}
+\lipsum[1-2] % Insert Lorem Ipsum. Should be replaced with your content
+Lorem Ipsum is a type of placeholder text \footfullcite{rundqvist2019}. % Example: Cite Lorem Ipsum and include the reference in the footer.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{bth-logo.png} % The width should be between 0 and 1. Where 1 is equal to 100%
+    \caption{This is how to include figures in your document}
+    \label{fig:exampleImg}
+\end{figure}
 
 % Methods %
-\chapter{Methods}
-\noindent
-\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
-\cite{lorem} % Example: Cite Lorem Ipsum without inclusion in the footer, using the author date format as specified under References above.
+\chapter{\GetTranslation{methods}}
+\lipsum[1-2] % Insert Lorem Ipsum. Should be replaced with your content
+Lorem Ipsum is a type of placeholder text\cite{rundqvist2019}. % Example: Cite Lorem Ipsum without inclusion in the footer, using the author date format as specified under References above.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        Name & Course\\ \hline
+        Bill & C++ \\
+        Jenny & Python
+    \end{tabular}
+    \caption{This is how to include tables in your document}
+    \label{tab:exampleTable}
+\end{table}{}
 
 % Results %
-\chapter{Results}
-\noindent
-\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+\chapter{\GetTranslation{results}}
+\lipsum[1-2] % Insert Lorem Ipsum. Should be replaced with your content
 A clickable link to example appendix \ref{Example Appendix}.
 
 % Discussion %
-\chapter{Discussion}
-\noindent
-\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+\chapter{\GetTranslation{discussion}}
+\lipsum[1-2] % Insert Lorem Ipsum. Should be replaced with your content
 
 % Conclusion %
-\chapter{Conclusion}
-\noindent
-\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+\chapter{\GetTranslation{conclusion}}
+\lipsum[1-2] % Insert Lorem Ipsum. Should be replaced with your content
 
 % References %
-\printbibliography[heading=bibintoc,title={References}]
+\printbibliography[heading=bibintoc, title=\GetTranslation{bibliography}]
 
 % Appendix %
 \appendix
-\chapter*{Appendix}
-\addcontentsline{toc}{chapter}{Appendix}
+\chapter*{\GetTranslation{appendix}}
+\addcontentsline{toc}{chapter}{\GetTranslation{appendix}}
 \renewcommand{\thesection}{\Alph{section}} % Use alphabetic numbering. Remove this line if numerical numbering is preffered.
 \section{Example Appendix}
 \label{Example Appendix}
-\blindtext[2] % Insert Lorem Ipsum. Should be replaced with your content
+\lipsum[1-2] % Insert Lorem Ipsum. Should be replaced with your content
 
 \end{document}
