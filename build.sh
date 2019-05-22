@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-zip BTH-Latex-Template.zip logo.png main.tex references.bib
+zip BTH-Latex-Template.zip bth-logo.png main.tex references.bib
