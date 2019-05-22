@@ -5,13 +5,15 @@
 BTH LaTeX Template
 ======
 
-A LaTeX template for use inside of BTH.
+A LaTeX template for use inside of BTH. [View on Overleaf demo](https://www.overleaf.com/read/vzpywvkfhvkr).
 
 [More courses](https://github.com/CourseNotesBTH) <br />
 See also [Programming Courses at BTH](https://github.com/ProgrammingCoursesBTH)
 
 <p align="center">
-  <img alt="Preview of front page" src="https://github.com/CourseNotesBTH/BTH-Latex-Template/raw/master/Preview.png">
+  <img alt="Preview of front page" src="https://github.com/CourseNotesBTH/BTH-Latex-Template/raw/master/Preview.png" href="https://www.overleaf.com/read/vzpywvkfhvkr">
+  <br />
+  <a href="https://www.overleaf.com/read/vzpywvkfhvkr">View on Overleaf</a> | <a href="https://github.com/CourseNotesBTH/BTH-Latex-Template/blob/master/Preview.pdf">View Rendered PDF</a>
 </p>
 
 # Quickstart
