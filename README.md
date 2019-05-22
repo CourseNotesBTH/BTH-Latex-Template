@@ -43,8 +43,8 @@ There are some different type of files that you may come across in each course n
 
 | File name | Labels | Description |
 | --------- | :----: | ----------- |
-| main.tex | 🇬🇧 | Main LaTeX entry for the template. |
-| references.bib | 🇬🇧 | The bibliography of the template. |
+| main.tex | 🇬🇧🇸🇪 | Main LaTeX entry for the template. |
+| references.bib | 🇬🇧🇸🇪 | The bibliography of the template. |
 | bth-logo.png |  | Logo for BTH. |
 | Preview.pdf | 🇬🇧 | A preview for the template. |
 | Preview.png | 🇬🇧 | A preview for the template's first page as shown above. |
